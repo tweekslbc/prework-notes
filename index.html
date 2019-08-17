@@ -12,18 +12,17 @@
 
   </style>
 
-
   </head>
   <body>
     <div id='root'></div>
 
     <!-- turns JSX into javascript-->
     <script type='text/babel'>
-      const { render }= ReactDom;
+      const { render }= ReactDOM;
       const root = document.querySelector('#root');
 
-      const Home = ()=> <div> Home </div>;
-      const About = ()=> <div> About Us </div>;
+      const Home = ()=> <h1> Home </h1>;
+      const About = ()=> <h1> About Us </h1>;
 
       class App extends React.Component{
         constructor(){
@@ -33,14 +32,20 @@
           };
         }
          componentDidMount(){
-           window.addEventListener('hashchange',() => {
+           window.addEventListener('hashchange', () => {
              const hash = window.location.hash;
-             console.log(hash);
+             const view = hash.slice(1);
+             this.setState({ view });
            });
+           const hash = window.location.hash;
+           if(!hash){
+             window.location.hash = 'home';
+           }
+           else {
+             const view = hash.slice(1);
+             this.setState({ view });
+           }
          }
-        setView(view){
-          this.setState({ view });
-        }
       render (){
         const { view } = this.state;
         let Current;
@@ -53,10 +58,10 @@
         return (
           <div>
             <nav>
-            <a onClick={() => this.setView('home')}> Home </a>
-            <a onClick={() => this.setView('about')}> About </a>
+            <a href='#home'> Home </a>
+            <a href='#about'> About </a>
             <nav>
-            <Current />
+            { !!Current && <Current />}
           </div>
         );
       }
