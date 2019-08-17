@@ -4,6 +4,15 @@
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <style>
+    nav {
+      display: flex;
+      justify-content: space-around;
+    }
+
+  </style>
+
+
   </head>
   <body>
     <div id='root'></div>
@@ -23,6 +32,9 @@
             view: 'home'
           };
         }
+        setView(view){
+          this.setState({ view });
+        }
       render (){
         const { view } = this.state;
         let Current;
@@ -34,8 +46,10 @@
         }
         return (
           <div>
-            <a> Home </a>
-            <a> About </a>
+            <nav>
+            <a onClick={() => this.setView('home')}> Home </a>
+            <a onClick={() => this.setView('about')}> About </a>
+            <nav>
             <Current />
           </div>
         );
