@@ -23,17 +23,27 @@
       const { render }= ReactDOM;
       const root = document.querySelector('#root');
 
-      const Home = ()=> <h1>Home</h1>;
+      const Home = (props)=> {
+        console.log(props);
+        return(
+        <h1>Home</h1>
+        );
       const About = ()=> <h1>About Us</h1>;
+
+      const Nav = ()=> {
+        return(
+          <nav>
+              <Link to='/home'>Home</Link>
+              <Link to='/about'>About</Link>
+          </nav>
+        );
+      };
 
       const App = ()=> {
         return (
           <HashRouter>
-            <nav>
-              <Link to='/home'>Home</Link>
-              <Link to='/about'>About</Link>
-            </nav>
         <Switch>
+        </nav>
             <Route path='/home' component={ Home } />
             <Route path='/about' component={ About } />
             <Redirect to='/home' />
