@@ -25,11 +25,18 @@
         }
       render (){
         const { view } = this.state;
+        let Current;
+        if(view === 'home'){
+          Curent = Home;
+        }
+        else if(view === 'about'){
+          Current = About
+        }
         return (
           <div>
             <a> Home </a>
             <a> About </a>
-            { view }
+            <Current />
           </div>
         );
       }
