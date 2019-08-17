@@ -3,6 +3,7 @@
     <meta name= 'viewport' content='width=device-width, initial-scale=1.0' />
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.0.1/react-router-dom.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
   <style>
     nav {
@@ -18,54 +19,23 @@
 
     <!-- turns JSX into javascript-->
     <script type='text/babel'>
+    const { HashRouter, Switch, Link, Route, Redirect } = ReactRouterDOM;
       const { render }= ReactDOM;
       const root = document.querySelector('#root');
 
       const Home = ()=> <h1> Home </h1>;
       const About = ()=> <h1> About Us </h1>;
 
-      class App extends React.Component{
-        constructor(){
-          super();
-          this.state = {
-            view: 'home'
-          };
-        }
-         componentDidMount(){
-           window.addEventListener('hashchange', () => {
-             const hash = window.location.hash;
-             const view = hash.slice(1);
-             this.setState({ view });
-           });
-           const hash = window.location.hash;
-           if(!hash){
-             window.location.hash = 'home';
-           }
-           else {
-             const view = hash.slice(1);
-             this.setState({ view });
-           }
-         }
-      render (){
-        const { view } = this.state;
-        let Current;
-        if(view === 'home'){
-          Curent = Home;
-        }
-        else if(view === 'about'){
-          Current = About
-        }
+      const App = ()=> {
         return (
-          <div>
+          <HashRouter>
             <nav>
-            <a href='#home'> Home </a>
-            <a href='#about'> About </a>
-            <nav>
-            { !!Current && <Current />}
-          </div>
+            </nav>
+            <Route path='/home' component={ Home } />
+            <Route path='/about' component={ About } />
+          </HashRouter>
         );
       }
-    }
     render(<App />, root);
 
     </script>
