@@ -33,8 +33,11 @@
               <Link to='/home'>Home</Link>
               <Link to='/about'>About</Link>
             </nav>
+        <Switch>
             <Route path='/home' component={ Home } />
             <Route path='/about' component={ About } />
+            <Redirect to='/home' />
+        </Switch>
           </HashRouter>
         );
       }
