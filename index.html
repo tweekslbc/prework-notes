@@ -9,6 +9,9 @@
     nav {
       display: flex;
       justify-content: space-around;
+     }
+    .selected{
+      border: solid 1px black;
     }
 
   </style>
@@ -23,18 +26,19 @@
       const { render }= ReactDOM;
       const root = document.querySelector('#root');
 
-      const Home = (props)=> {
-        console.log(props);
+      const Home = ()=> {
         return(
         <h1>Home</h1>
         );
       const About = ()=> <h1>About Us</h1>;
 
-      const Nav = ()=> {
+      const Nav = (props)=> {
+        const path = props.location.pathname;
+        console.log(path);
         return(
           <nav>
-              <Link to='/home'>Home</Link>
-              <Link to='/about'>About</Link>
+              <Link to='/home' className= {path === '/home' ? 'selected': ''}>Home</Link>
+              <Link to='/about' className= {path === '/about' ? 'selected': ''}>About</Link>
           </nav>
         );
       };
@@ -42,8 +46,8 @@
       const App = ()=> {
         return (
           <HashRouter>
+            <Route component = { Nav } />
         <Switch>
-        </nav>
             <Route path='/home' component={ Home } />
             <Route path='/about' component={ About } />
             <Redirect to='/home' />
