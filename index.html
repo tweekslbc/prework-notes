@@ -32,6 +32,12 @@
             view: 'home'
           };
         }
+         componentDidMount(){
+           window.addEventListener('hashchange',() => {
+             const hash = window.location.hash;
+             console.log(hash);
+           });
+         }
         setView(view){
           this.setState({ view });
         }
