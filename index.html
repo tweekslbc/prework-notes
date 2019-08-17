@@ -7,10 +7,34 @@
   </head>
   <body>
     <div id='root'></div>
-    <script>
-    const { render }= ReactDom;
-    const root = document.querySelector('#root');
-    render(React.createElement('hr'), root);
+
+    <!-- turns JSX into javascript-->
+    <script type='text/babel'>
+      const { render }= ReactDom;
+      const root = document.querySelector('#root');
+
+      const Home = ()=> <div> Home </div>;
+      const About = ()=> <div> About Us </div>;
+
+      class App extends React.Component{
+        constructor(){
+          super();
+          this.state = {
+            view: 'home'
+          };
+        }
+      render (){
+        const { view } = this.state;
+        return (
+          <div>
+            <a> Home </a>
+            <a> About </a>
+            { view }
+          </div>
+        );
+      }
+    }
+    render(<App />, root);
 
     </script>
 
