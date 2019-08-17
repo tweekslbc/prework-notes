@@ -30,11 +30,11 @@
         return(
         <h1>Home</h1>
         );
+      }
       const About = ()=> <h1>About Us</h1>;
 
       const Nav = (props)=> {
         const path = props.location.pathname;
-        console.log(path);
         return(
           <nav>
               <Link to='/home' className= {path === '/home' ? 'selected': ''}>Home</Link>
@@ -43,17 +43,29 @@
         );
       };
 
-      const App = ()=> {
+      class App extends React.Component {
+        constructor(){
+          super();
+          this.state ={
+            users: [
+              { name: 'moe'},
+              { name: 'larry'}
+              ]
+          };
+        }
+      render(){
+        const { users} = this.state;
         return (
           <HashRouter>
             <Route component = { Nav } />
-        <Switch>
-            <Route path='/home' component={ Home } />
-            <Route path='/about' component={ About } />
-            <Redirect to='/home' />
-        </Switch>
+              <Switch>
+                <Route path='/home' component={ Home } />
+                 <Route path='/about' component={ About } />
+                 <Redirect to='/home' />
+               </Switch>
           </HashRouter>
         );
+       }
       }
     render(<App />, root);
 
