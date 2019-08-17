@@ -31,6 +31,17 @@
         <h1>Home</h1>
         );
       }
+      const Users = ({ users })=> {
+        return(
+          <div>
+        <h1>Users</h1>
+        <ul>
+        { users.map( user => <li>{ user.name }</li>)}
+
+        </ul>
+        </div>
+        );
+      }
       const About = ()=> <h1>About Us</h1>;
 
       const Nav = (props)=> {
@@ -39,6 +50,7 @@
           <nav>
               <Link to='/home' className= {path === '/home' ? 'selected': ''}>Home</Link>
               <Link to='/about' className= {path === '/about' ? 'selected': ''}>About</Link>
+              <Link to='/users' className= {path === '/users' ? 'selected': ''}>Users</Link>
           </nav>
         );
       };
@@ -53,6 +65,12 @@
               ]
           };
         }
+        componentDidMount(){
+          setTimeout(() => {
+            const users =[...this.state.users, {name: 'curly'}];
+            this.setState({ users });
+          }, 1000);
+        }
       render(){
         const { users} = this.state;
         return (
@@ -61,6 +79,7 @@
               <Switch>
                 <Route path='/home' component={ Home } />
                  <Route path='/about' component={ About } />
+                 <Route path='/users' render={ () => <Users users={ Users }/>}/>
                  <Redirect to='/home' />
                </Switch>
           </HashRouter>
